@@ -20,7 +20,15 @@ you can implement append with delete origin && upload new again
 
 **5 details see client_test.go,good luck ^_^**
 
-## $ go get github.com/tedcy/fdfs_client
+### get new client
 
-# Author
+```
+go get github.com/Junjiayy/fdfs_client
+```
+
+# Original Author
 yue.cheng.ted@gmail.com
+
+### change
+
+In the process of using, the way to read the file to get the configuration information made me feel inconvenient, so I modified it to custom configuration information

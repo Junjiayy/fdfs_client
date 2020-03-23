@@ -10,14 +10,10 @@ type Client struct {
 	trackerPools    map[string]*connPool
 	storagePools    map[string]*connPool
 	storagePoolLock *sync.RWMutex
-	config          *config
+	config          *Configuration
 }
 
-func NewClientWithConfig(configName string) (*Client, error) {
-	config, err := newConfig(configName)
-	if err != nil {
-		return nil, err
-	}
+func NewClientWithConfig(config *Configuration) (*Client, error) {
 	client := &Client{
 		config:          config,
 		storagePoolLock: &sync.RWMutex{},
@@ -25,8 +21,8 @@ func NewClientWithConfig(configName string) (*Client, error) {
 	client.trackerPools = make(map[string]*connPool)
 	client.storagePools = make(map[string]*connPool)
 
-	for _, addr := range config.trackerAddr {
-		trackerPool, err := newConnPool(addr, config.maxConns)
+	for _, addr := range config.Trackers {
+		trackerPool, err := newConnPool(addr, config.MaxOpenCons)
 		if err != nil {
 			return nil, err
 		}
