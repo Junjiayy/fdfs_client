@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	MAXCONNS_LEAST = 5
+	MAXCONNS_LEAST = 2
 )
 
 type pConn struct {
@@ -32,8 +32,9 @@ type connPool struct {
 
 func newConnPool(addr string, maxConns int) (*connPool, error) {
 	if maxConns < MAXCONNS_LEAST {
-		return nil, fmt.Errorf("too little maxConns < %d", MAXCONNS_LEAST)
+		maxConns = MAXCONNS_LEAST
 	}
+
 	connPool := &connPool{
 		conns:    list.New(),
 		addr:     addr,
