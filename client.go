@@ -256,7 +256,7 @@ func (this *Client) getStorageConn(storageInfo *storageInfo) (net.Conn, error) {
 		this.storagePoolLock.Unlock()
 		return storagePool.get()
 	}
-	storagePool, err := newConnPool(storageInfo.addr, this.config.maxConns)
+	storagePool, err := newConnPool(storageInfo.addr, this.config.MaxOpenCons)
 	if err != nil {
 		this.storagePoolLock.Unlock()
 		return nil, err
